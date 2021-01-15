@@ -1,23 +1,39 @@
-import React, { useEffect, useState } from 'react';
-
+import React, {useState} from 'react';
+import { useSelector } from 'react-redux';
+import ModalAddNewMovie from './../../containers/AddNewMoviesModal/index.jsx';
 import MovieList from './MovieList';
-import MovieService from '../../services/MovieService';
+import {filteredMovieListSelector} from './../../reducers/movieReducer';
 
 const Movies = () => {
-  const [movies, setMovies] = useState([]);
+  const movies=useSelector(filteredMovieListSelector);
 
-  useEffect(() => {
-    setMovies(MovieService.getMovies());
-  }, []);
+  const [isHiddenModal, setIsHiddenModal] = useState(true);
+
+  const handleOpanModal = () => {
+    setIsHiddenModal(!isHiddenModal)
+  }
 
   return (
-    <div className="container-fluid" style={{ marginLeft: '-15px' }}>
+    <React.Fragment>
+    <div className="btn-add">
+        <button onClick={handleOpanModal} >
+          Add new movie
+        </button>
+        {
+                !isHiddenModal ? (
+                    <ModalAddNewMovie
+                    handleOpanModal={handleOpanModal}
+                    />) : ""
+            }
+      </div>
+    <div className="container-fluid" style={{ marginLeft: '-15px' }}>      
       <div className="d-flex flex-row">
         <div className="col-sm-12">
           <MovieList movies={movies} />
         </div>
       </div>
     </div>
+    </React.Fragment>
   );
 }
 

@@ -1,9 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { useDispatch } from "react-redux";
 import StarRating from '../StarRating';
+import {deleteMovie} from '../../actions/movies';
 
-const MovieCard = ({ movie }) => (
+function MovieCard({ movie }){
+
+  const dispatch=useDispatch();
+
+  const handleDeleteMovie=(movieForDelete)=>(e)=>{
+    e.preventDefault();   
+    dispatch(deleteMovie(movieForDelete));
+  }
+
+  return(
   <div className="movie-card">
     <div className="movie-card card">
       <img className="card-img-top" src={movie.imageUrl} alt="" />
@@ -14,6 +24,7 @@ const MovieCard = ({ movie }) => (
           {movie.description}
         </p>
       </div>
+      <button onClick={handleDeleteMovie(movie.id)}>Delete</button>
       <div className="card-footer">
         <div className="clearfix">
           <div className="float-left mt-1">
@@ -24,8 +35,9 @@ const MovieCard = ({ movie }) => (
       </div>
     </div>
   </div>
-);
-
+  )
+  };
+/*
 MovieCard.defaultProps = {
   movie: {},
 };
@@ -33,5 +45,5 @@ MovieCard.defaultProps = {
 MovieCard.propTypes = {
   movie: PropTypes.object,
 };
-
+*/
 export default MovieCard;

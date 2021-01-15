@@ -39,8 +39,14 @@
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "prop-types": "^15.6.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "reselect": "^4.0.0",
+    "uuid": "^8.3.2"
   }
 }
